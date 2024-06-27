@@ -14,7 +14,7 @@ const HomeScreen = () => {
     {
       key: "header",
       content: (
-        <View style={{ position: "absolute" }}>
+        <View className="absolute">
           <ImageBackground
             source={require("../../assets/left_bg.png")}
             style={{ width: 200, height: 200 }}
@@ -25,21 +25,8 @@ const HomeScreen = () => {
     {
       key: "title",
       content: (
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            marginVertical: 20,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 36,
-              marginBottom: 8,
-              color: "#FFA500",
-              fontWeight: "200",
-            }}
-          >
+        <View className="flex justify-center items-center my-5">
+          <Text className="text-4xl mb-2 text-[#ff6347] font-light">
             Sea Salon
           </Text>
         </View>
@@ -48,47 +35,14 @@ const HomeScreen = () => {
     {
       key: "promotion",
       content: (
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <View
-            style={{
-              width: 350,
-              height: 160,
-              backgroundColor: "#ff6347",
-              borderRadius: 12,
-              flexDirection: "row",
-            }}
-          >
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                paddingHorizontal: 20,
-              }}
-            >
-              <Text
-                style={{ fontSize: 24, fontWeight: "400", textAlign: "center" }}
-              >
+        <View className="justify-center items-center">
+          <View className="w-[350px] h-[160px] bg-[#ff6347] rounded-lg flex flex-row">
+            <View className="flex-1 flex-col justify-center items-center px-5">
+              <Text className="text-xl font-medium text-white text-center">
                 Look Awesome & Save Some
               </Text>
-              <View
-                style={{
-                  width: 150,
-                  height: 30,
-                  borderRadius: 15,
-                  backgroundColor: "#ffebcd",
-                  justifyContent: "center",
-                  marginTop: 8,
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontWeight: "400",
-                    textAlign: "center",
-                  }}
-                >
+              <View className="w-[150] h-[30] rounded-full bg-[#ffebcd] justify-center mt-2">
+                <Text className="text-sm font-normal text-center">
                   Get Upto 50% off
                 </Text>
               </View>
@@ -106,14 +60,7 @@ const HomeScreen = () => {
     {
       key: "categories",
       content: (
-        <View
-          style={{
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            marginTop: 20,
-            paddingHorizontal: 20,
-          }}
-        >
+        <View className=" justify-start items-start mt-5 px-5">
           <Text style={{ fontSize: 24, fontWeight: "500" }}>Categories</Text>
           <CategoryList onCategoryPress={handleCategoryPress} />
         </View>
@@ -122,13 +69,7 @@ const HomeScreen = () => {
     {
       key: "specialists",
       content: (
-        <View
-          style={{
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            paddingHorizontal: 20,
-          }}
-        >
+        <View className="px-5 justify-start items-start">
           <Text style={{ fontSize: 24, fontWeight: "500" }}>
             Hair Specialist
           </Text>

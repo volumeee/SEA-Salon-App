@@ -4,23 +4,21 @@ import {
   Text,
   FlatList,
   ActivityIndicator,
-  StyleSheet,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { supabase } from "../../services/supabase";
-
-// Define a type for the hair specialist data
-interface HairSpecialist {
-  id: number;
-  specialist_name: string;
-  specialist_phone: string;
-  specialist_price: string;
-  profile_picture: string;
-}
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import {
+  RootStackParamList,
+  HairSpecialist,
+} from "../../types/navigationTypes"; // import the types
 
 const HairSpecialistList = ({ categoryId }: { categoryId: number | null }) => {
   const [hairSpecialists, setHairSpecialists] = useState<HairSpecialist[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // use the type here
 
   useEffect(() => {
     fetchHairSpecialists();
@@ -32,7 +30,7 @@ const HairSpecialistList = ({ categoryId }: { categoryId: number | null }) => {
       let query = supabase
         .from("hair_specialist")
         .select(
-          "id, specialist_name, specialist_phone, specialist_price, profile_picture"
+          "id, specialist_name, specialist_phone, specialist_price, profile_picture, vote_average"
         );
 
       if (categoryId !== null) {
@@ -54,18 +52,39 @@ const HairSpecialistList = ({ categoryId }: { categoryId: number | null }) => {
     }
   };
 
+  const handlePress = (item: HairSpecialist) => {
+    navigation.navigate("Transaction", { specialist: item });
+  };
+
   const renderHairSpecialistItem = ({ item }: { item: HairSpecialist }) => (
-    <View style={styles.specialistCard}>
-      <Text style={styles.name}>{item.specialist_name}</Text>
-      <Text style={styles.phone}>Phone: {item.specialist_phone}</Text>
-      <Text style={styles.price}>Price: {item.specialist_price}</Text>
-      <View style={styles.imageContainer}>
-        <ImageBackground
-          source={{ uri: item.profile_picture }}
-          style={styles.profileImage}
-        />
+    <TouchableOpacity
+      onPress={() => handlePress(item)}
+      className="bg-[#ffffff] p-4 rounded-lg mb-6 mr-6 w-40 shadow-md"
+    >
+      <View className="flex items-center">
+        <View className="w-24 h-24 rounded-full overflow-hidden">
+          <ImageBackground
+            source={{ uri: item.profile_picture }}
+            className="w-full h-full"
+          />
+        </View>
       </View>
-    </View>
+      <View className="flex-row items-center justify-between mt-2">
+        <Text className="text-lg font-bold">{item.specialist_name}</Text>
+        <View className="flex-row items-center">
+          <Ionicons name="star" size={16} color="#FFD700" />
+          <Text className="text-sm font-bold ml-[0.5px]">
+            {item.vote_average.toFixed(1)}
+          </Text>
+        </View>
+      </View>
+      <Text className="text-xs text-gray-600 mt-1">
+        Phone: {item.specialist_phone}
+      </Text>
+      <Text className="text-xs text-gray-600 font-bold">
+        Price: ${item.specialist_price}
+      </Text>
+    </TouchableOpacity>
   );
 
   if (loading) {
@@ -77,42 +96,10 @@ const HairSpecialistList = ({ categoryId }: { categoryId: number | null }) => {
       data={hairSpecialists}
       keyExtractor={(item) => item.id.toString()}
       renderItem={renderHairSpecialistItem}
-      contentContainerStyle={styles.listContainer}
+      style={{ padding: 7, marginTop: 5 }}
+      numColumns={2}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  listContainer: {
-    padding: 10,
-  },
-  specialistCard: {
-    backgroundColor: "#ffefd5",
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  phone: {
-    fontSize: 16,
-    color: "#666",
-  },
-  price: {
-    fontSize: 16,
-    color: "#666",
-  },
-  imageContainer: {
-    marginTop: 10,
-    alignItems: "center",
-  },
-  profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-  },
-});
 
 export default HairSpecialistList;

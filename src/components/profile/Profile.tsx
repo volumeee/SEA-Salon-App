@@ -11,7 +11,7 @@ import { Icon } from "@rneui/themed";
 import { Session } from "@supabase/supabase-js";
 import Avatar from "./Avatar";
 import { Input, Button } from "@rneui/themed"; // Assuming these are from your UI library
-import { supabase } from "../services/supabase";
+import { supabase } from "../../services/supabase";
 
 export default function Profile({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true);

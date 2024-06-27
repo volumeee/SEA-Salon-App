@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { supabase } from "../services/supabase";
+import { supabase } from "../../services/supabase";
 import { Ionicons } from "@expo/vector-icons";
 
 interface Props {

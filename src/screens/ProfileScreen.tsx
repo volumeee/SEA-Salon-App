@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { Session } from "@supabase/supabase-js"; // Make sure you have this import
 import { supabase } from "../services/supabase"; // Ensure you have access to supabase
-import Profile from "../components/Profile";
+import Profile from "../components/profile/Profile";
 
 const ProfileScreen = () => {
   const [session, setSession] = React.useState<Session | null>(null);

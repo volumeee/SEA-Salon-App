@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
   FlatList,
   ActivityIndicator,
-  StyleSheet,
   TouchableOpacity,
-  ImageBackground,
 } from "react-native";
-import { supabase } from "../services/supabase";
+import { supabase } from "../../services/supabase";
 
 // Define a type for the category data
 interface Category {
@@ -16,11 +14,15 @@ interface Category {
   categories_name: string;
 }
 
-const CategoryList = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
+interface CategoryListProps {
+  onCategoryPress: (categoryId: number) => void;
+}
 
-  useEffect(() => {
+const CategoryList = ({ onCategoryPress }: CategoryListProps) => {
+  const [categories, setCategories] = React.useState<Category[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
     fetchCategories();
   }, []);
 
@@ -50,16 +52,19 @@ const CategoryList = () => {
     }
   };
 
-  const handleCategoryPress = (categoryId: number) => {
-    console.log("Category ID:", categoryId);
-  };
-
   const renderCategoryItem = ({ item }: { item: Category }) => (
     <TouchableOpacity
-      className="p-[15px] mx-[5px] bg-[#ff6347] rounded-[12px] justify-center items-center"
-      onPress={() => handleCategoryPress(item.id)}
+      style={{
+        padding: 15,
+        marginHorizontal: 5,
+        backgroundColor: "#ff6347",
+        borderRadius: 12,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      onPress={() => onCategoryPress(item.id)}
     >
-      <Text className="text-white font-normal items-center text-base">
+      <Text style={{ color: "white", fontSize: 16 }}>
         {item.categories_name}
       </Text>
     </TouchableOpacity>
@@ -74,7 +79,7 @@ const CategoryList = () => {
       data={categories}
       keyExtractor={(item) => item.id.toString()}
       renderItem={renderCategoryItem}
-      className="flex-row py-3"
+      contentContainerStyle={{ flexDirection: "row", paddingVertical: 10 }}
       horizontal={true}
       showsHorizontalScrollIndicator={false}
     />

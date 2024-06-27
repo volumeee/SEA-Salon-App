@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, AppState, Text, ImageBackground } from "react-native";
 import { Button, Input } from "@rneui/themed";
-import { supabase } from "../services/supabase";
-import CustomAlert from "../components/CustomAlert";
+import { supabase } from "../../services/supabase";
+import CustomAlert from "../other/CustomAlert";
 
 AppState.addEventListener("change", (state) => {
   if (state === "active") {
@@ -81,7 +81,7 @@ export default function Auth() {
 
   return (
     <ImageBackground
-      source={require("../../assets/xsplash.png")}
+      source={require("../../../assets/splash.png")}
       className="flex-1 justify-center items-center"
       resizeMode="cover"
     >

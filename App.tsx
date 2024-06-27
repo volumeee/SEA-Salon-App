@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar, View } from "react-native";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "./src/services/supabase";
-import Auth from "./src/components/Auth";
+import Auth from "./src/components/profile/Auth";
 import SplashScreen from "./src/screens/SplashScreen";
 import MainStackNavigator from "./src/navigation/MainStackNavigation";
 

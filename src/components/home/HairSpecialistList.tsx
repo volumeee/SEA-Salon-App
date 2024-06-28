@@ -13,12 +13,12 @@ import { useNavigation, NavigationProp } from "@react-navigation/native";
 import {
   RootStackParamList,
   HairSpecialist,
-} from "../../types/navigationTypes"; // import the types
+} from "../../types/NavigationTypes";
 
 const HairSpecialistList = ({ categoryId }: { categoryId: number | null }) => {
   const [hairSpecialists, setHairSpecialists] = useState<HairSpecialist[]>([]);
   const [loading, setLoading] = useState(true);
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // use the type here
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     fetchHairSpecialists();
@@ -27,11 +27,20 @@ const HairSpecialistList = ({ categoryId }: { categoryId: number | null }) => {
   const fetchHairSpecialists = async () => {
     try {
       setLoading(true);
-      let query = supabase
-        .from("hair_specialist")
-        .select(
-          "id, specialist_name, specialist_phone, specialist_price, profile_picture, vote_average"
-        );
+      let query = supabase.from("hair_specialist").select(
+        `
+          id, 
+          specialist_name, 
+          specialist_phone, 
+          specialist_price, 
+          profile_picture, 
+          vote_average,
+          categories (
+            id,
+            categories_name
+          )
+        `
+      );
 
       if (categoryId !== null) {
         query = query.eq("categories_id", categoryId);
@@ -44,7 +53,15 @@ const HairSpecialistList = ({ categoryId }: { categoryId: number | null }) => {
         return;
       }
 
-      setHairSpecialists(data);
+      // Ensure that `categories` is an array
+      const formattedData = data.map((item: any) => ({
+        ...item,
+        categories: Array.isArray(item.categories)
+          ? item.categories
+          : [item.categories],
+      }));
+
+      setHairSpecialists(formattedData);
     } catch (error) {
       console.error("Error fetching hair specialists:", error);
     } finally {
@@ -53,8 +70,83 @@ const HairSpecialistList = ({ categoryId }: { categoryId: number | null }) => {
   };
 
   const handlePress = (item: HairSpecialist) => {
-    navigation.navigate("Transaction", { specialist: item });
+    navigation.navigate("Order", { specialist: item });
+    console.log(item);
   };
+
+  // const renderHairSpecialistItem = ({ item }: { item: HairSpecialist }) => (
+  //   <TouchableOpacity
+  //     onPress={() => handlePress(item)}
+  //     style={{
+  //       backgroundColor: "#ffffff",
+  //       padding: 16,
+  //       borderRadius: 8,
+  //       marginBottom: 16,
+  //       marginRight: 8,
+  //       width: 180,
+  //       shadowColor: "#000",
+  //       shadowOffset: { width: 0, height: 2 },
+  //       shadowOpacity: 0.25,
+  //       shadowRadius: 3.84,
+  //       elevation: 5,
+  //     }}
+  //   >
+  //     <View style={{ flexDirection: "row", alignItems: "center" }}>
+  //       <View
+  //         style={{
+  //           width: 60,
+  //           height: 60,
+  //           borderRadius: 30,
+  //           overflow: "hidden",
+  //         }}
+  //       >
+  //         <ImageBackground
+  //           source={{ uri: item.profile_picture }}
+  //           style={{ width: "100%", height: "100%" }}
+  //         />
+  //       </View>
+  //     </View>
+  //     <View
+  //       style={{
+  //         flexDirection: "row",
+  //         justifyContent: "space-between",
+  //         alignItems: "center",
+  //         marginTop: 8,
+  //       }}
+  //     >
+  //       <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+  //         {item.specialist_name}
+  //       </Text>
+  //       <View style={{ flexDirection: "row", alignItems: "center" }}>
+  //         <Ionicons name="star" size={16} color="#FFD700" />
+  //         <Text style={{ fontSize: 14, fontWeight: "bold", marginLeft: 2 }}>
+  //           {item.vote_average.toFixed(1)}
+  //         </Text>
+  //       </View>
+  //     </View>
+  //     <Text style={{ fontSize: 12, color: "#666", marginTop: 4 }}>
+  //       Phone: {item.specialist_phone}
+  //     </Text>
+  //     <Text
+  //       style={{
+  //         fontSize: 12,
+  //         color: "#666",
+  //         fontWeight: "bold",
+  //         marginTop: 4,
+  //       }}
+  //     >
+  //       Price: ${item.specialist_price}
+  //     </Text>
+  //     <Text style={{ fontSize: 12, color: "#666", marginTop: 4 }}>
+  //       Category:{" "}
+  //       {item.categories && item.categories.length > 0
+  //         ? item.categories
+  //             .map((category) => category.categories_name)
+  //             .join(", ")
+  //         : "N/A"}
+  //     </Text>
+  //   </TouchableOpacity>
+  // );
 
   const renderHairSpecialistItem = ({ item }: { item: HairSpecialist }) => (
     <TouchableOpacity
@@ -78,6 +170,13 @@ const HairSpecialistList = ({ categoryId }: { categoryId: number | null }) => {
           </Text>
         </View>
       </View>
+      <Text className="text-xs text-black p-1 bg-slate-300 rounded-md mt-[-2px] w-[60px] text-center">
+        {item.categories && item.categories.length > 0
+          ? item.categories
+              .map((category) => category.categories_name)
+              .join(", ")
+          : "N/A"}
+      </Text>
       <Text className="text-xs text-gray-600 mt-1">
         Phone: {item.specialist_phone}
       </Text>

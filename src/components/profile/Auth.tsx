@@ -3,6 +3,7 @@ import { View, AppState, Text, ImageBackground } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import { supabase } from "../../services/supabase";
 import CustomAlert from "../other/CustomAlert";
+import { useSession } from "./SessionContext";
 
 AppState.addEventListener("change", (state) => {
   if (state === "active") {
@@ -24,6 +25,7 @@ export default function Auth() {
   const [isLoginView, setIsLoginView] = useState(true);
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const { setSession } = useSession();
 
   const showAlert = (message: string) => {
     setAlertMessage(message);
@@ -45,13 +47,20 @@ export default function Auth() {
     }
 
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error, data } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
-    if (error) showAlert(error.message);
     setLoading(false);
+
+    if (error) {
+      showAlert(error.message);
+    } else {
+      console.log("Login successful. User session:", data.session);
+      setSession(data.session);
+      showAlert("Login successful!");
+    }
   }
 
   async function signUpWithEmail() {
@@ -81,7 +90,7 @@ export default function Auth() {
 
   return (
     <ImageBackground
-      source={require("../../../assets/splash.png")}
+      source={require("../../../assets/xsplash.png")}
       className="flex-1 justify-center items-center"
       resizeMode="cover"
     >

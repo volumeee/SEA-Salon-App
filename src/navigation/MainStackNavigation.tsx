@@ -4,9 +4,10 @@ import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ReservationScreen from "../screens/ReservationScreen";
 import Transaction from "../components/reservation/Transaction";
-import { RootStackParamList } from "../types/navigationTypes"; // import the type
+import TransactionPayment from "../components/reservation/TransactionPayment";
+import { RootStackParamList } from "../types/NavigationTypes";
 
-const Stack = createStackNavigator<RootStackParamList>(); // use the type here
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function MainStackNavigator() {
   return (
@@ -19,7 +20,8 @@ export default function MainStackNavigator() {
       <Stack.Screen name="HomeDetail" component={HomeScreen} />
       <Stack.Screen name="ReservationDetail" component={ReservationScreen} />
       <Stack.Screen name="ProfileDetail" component={ProfileScreen} />
-      <Stack.Screen name="Transaction" component={Transaction} />
+      <Stack.Screen name="Order" component={Transaction} />
+      <Stack.Screen name="Payment" component={TransactionPayment} />
     </Stack.Navigator>
   );
 }

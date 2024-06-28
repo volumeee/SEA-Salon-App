@@ -42,7 +42,7 @@ const ReservationScreen = () => {
           t_state_id (status)
         `
         )
-        .eq("customer_id", session.user.id); // Filter by customer_id
+        .eq("customer_id", session.user.id);
 
       if (error) {
         console.error(error);

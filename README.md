@@ -5,7 +5,7 @@ SEA Salon App adalah aplikasi mobile untuk salon yang memungkinkan pengguna untu
 ## Fitur
 
 - [x] Halaman utama yang menampilkan informasi salon dan layanan yang ditawarkan
-- [ ] Sistem ulasan untuk pelanggan
+- [x] Sistem ulasan/rating untuk pelanggan
 - [x] Sistem reservasi untuk pelanggan
 - [x] Sistem otentikasi menggunakan Supabase
 - [x] Integrasi dengan database real-time Supabase untuk menyimpan data ulasan dan reservasi

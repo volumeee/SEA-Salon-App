@@ -162,7 +162,7 @@ const TransactionPayment = () => {
               </View>
             </View>
             <Text style={styles.voteAverage}>
-              Rating: {specialist.vote_average}
+              Rating: {specialist.vote_average.toFixed(1)}
             </Text>
           </View>
           <View style={styles.borderDashed}></View>
@@ -208,9 +208,7 @@ const TransactionPayment = () => {
           <View style={styles.borderDashed}></View>
           <View style={styles.priceSection}>
             <Text style={styles.priceTitle}>Price</Text>
-            <Text style={styles.priceText}>
-              ${specialist.specialist_price.toFixed(2)}
-            </Text>
+            <Text style={styles.priceText}>${specialist.specialist_price}</Text>
           </View>
           <View style={styles.footer}>
             <TouchableOpacity style={styles.payButton} onPress={handlePayNow}>

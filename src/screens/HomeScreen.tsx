@@ -85,6 +85,7 @@ const HomeScreen = () => {
       keyExtractor={(item) => item.key}
       renderItem={({ item }) => <>{item.content}</>}
       contentContainerStyle={{ paddingBottom: 20 }}
+      showsVerticalScrollIndicator={false}
     />
   );
 };

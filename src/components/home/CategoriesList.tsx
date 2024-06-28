@@ -55,7 +55,8 @@ const CategoryList = ({ onCategoryPress }: CategoryListProps) => {
   const renderCategoryItem = ({ item }: { item: Category }) => (
     <TouchableOpacity
       style={{
-        padding: 15,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
         marginHorizontal: 5,
         backgroundColor: "#ff6347",
         borderRadius: 12,
@@ -64,7 +65,7 @@ const CategoryList = ({ onCategoryPress }: CategoryListProps) => {
       }}
       onPress={() => onCategoryPress(item.id)}
     >
-      <Text style={{ color: "white", fontSize: 16 }}>
+      <Text style={{ color: "white", fontSize: 14, fontWeight: 400 }}>
         {item.categories_name}
       </Text>
     </TouchableOpacity>

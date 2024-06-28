@@ -4,7 +4,8 @@ export type RootStackParamList = {
   ReservationDetail: undefined;
   ProfileDetail: undefined;
   Order: { specialist: HairSpecialist };
-  Payment: { specialist: HairSpecialist; date: string }; // Change Date to string
+  Payment: { specialist: HairSpecialist; date: string };
+  HistoryDetail: { transaction: Transaction };
 };
 
 export type Category = {
@@ -25,7 +26,7 @@ export type HairSpecialist = {
 export type Transaction = {
   id: number;
   created_at: string;
-  hair_specialist_id: number;
+  hair_specialist_id: HairSpecialist;
   t_specialist_name: string;
   t_specialist_categories: string;
   t_specialist_phone: string;
@@ -33,7 +34,7 @@ export type Transaction = {
   t_transaction_date: string;
   t_payment_method: string;
   t_amount_price: string;
-  t_state_id: State[];
+  t_state_id: State;
   customer_id: number;
 };
 

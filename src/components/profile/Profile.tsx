@@ -97,8 +97,8 @@ export default function Profile({ session }: { session: Session }) {
     <View className="flex mt-10">
       <View className="items-center p-6">
         <Avatar size={120} url={avatarUrl} />
-        <Text className="font-bold text-2xl mt-3">{fullName}</Text>
-        <Text className="font-normal text-lg">@{username}</Text>
+        <Text className="font-bold text-xl mt-3">{fullName}</Text>
+        <Text className="font-normal text-base">@{username}</Text>
       </View>
       {!editing ? (
         <View className="flex-row justify-center px-10 gap-2">
@@ -106,7 +106,7 @@ export default function Profile({ session }: { session: Session }) {
             className="flex-1 bg-[#ff6347] p-3 rounded-lg items-center justify-center mx-2"
             onPress={() => setEditing(true)}
           >
-            <Text className="text-white font-bold text-base">Edit Profile</Text>
+            <Text className="text-white font-bold text-sm">Edit Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity
             className={`flex-1 bg-[#ff6347] p-3 rounded-lg items-center justify-center mx-2 ${
@@ -118,7 +118,7 @@ export default function Profile({ session }: { session: Session }) {
             {loading ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Text className="text-white font-bold text-base">Logout</Text>
+              <Text className="text-white font-bold text-sm">Logout</Text>
             )}
           </TouchableOpacity>
         </View>
@@ -144,16 +144,22 @@ export default function Profile({ session }: { session: Session }) {
               label="Fullname"
               value={newFullName || fullName}
               onChangeText={(text) => setNewFullName(text)}
+              labelStyle={{ fontSize: 14 }}
+              style={{ fontSize: 14 }}
             />
             <Input
               label="Username"
               value={newUsername || username}
               onChangeText={(text) => setNewUsername(text)}
+              labelStyle={{ fontSize: 14 }}
+              style={{ fontSize: 14 }}
             />
             <Input
               label="Website"
               value={newWebsite || website}
               onChangeText={(text) => setNewWebsite(text)}
+              labelStyle={{ fontSize: 14 }}
+              style={{ fontSize: 14 }}
             />
             <View className="flex-row justify-between m-5">
               <TouchableOpacity
@@ -166,14 +172,14 @@ export default function Profile({ session }: { session: Session }) {
                 {loading ? (
                   <ActivityIndicator color="#fff" />
                 ) : (
-                  <Text className="text-white font-bold text-base">Update</Text>
+                  <Text className="text-white font-bold text-sm">Update</Text>
                 )}
               </TouchableOpacity>
               <TouchableOpacity
                 className="flex-1 bg-[#ff6347] p-3 rounded-lg items-center justify-center mx-2"
                 onPress={() => setEditing(false)}
               >
-                <Text className="text-white font-bold text-base">Cancel</Text>
+                <Text className="text-white font-bold text-sm">Cancel</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -202,10 +208,8 @@ function MenuItem({ icon, text }: { icon: string; text: string }) {
         borderBottomColor: "#ddd",
       }}
     >
-      <Icon name={icon} type="material" size={24} />
-      <Text style={{ marginLeft: 16, fontSize: 16, color: "#333" }}>
-        {text}
-      </Text>
+      <Icon name={icon} type="material" size={20} />
+      <Text className="ml-4 text-sm text-black">{text}</Text>
     </View>
   );
 }

@@ -6,6 +6,7 @@ import ReservationScreen from "../screens/ReservationScreen";
 import Transaction from "../components/reservation/Transaction";
 import TransactionPayment from "../components/reservation/TransactionPayment";
 import { RootStackParamList } from "../types/NavigationTypes";
+import HistoryDetail from "../components/reservation/HistoryDetail";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -22,6 +23,11 @@ export default function MainStackNavigator() {
       <Stack.Screen name="ProfileDetail" component={ProfileScreen} />
       <Stack.Screen name="Order" component={Transaction} />
       <Stack.Screen name="Payment" component={TransactionPayment} />
+      <Stack.Screen
+        name="HistoryDetail"
+        component={HistoryDetail}
+        options={{ headerTitle: "History Detail" }}
+      />
     </Stack.Navigator>
   );
 }

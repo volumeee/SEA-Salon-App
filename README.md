@@ -10,6 +10,12 @@ SEA Salon App adalah aplikasi mobile untuk salon yang memungkinkan pengguna untu
 - [x] Sistem otentikasi menggunakan Supabase
 - [x] Integrasi dengan database real-time Supabase untuk menyimpan data ulasan dan reservasi
 
+## Demo
+
+https://github.com/volumeee/SEA-Salon-App/assets/57589007/6cdda083-c3d1-4432-9231-bdfb71b686a9
+
+
+
 ## Instalasi
 
 Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan aplikasi di lingkungan lokal Anda.

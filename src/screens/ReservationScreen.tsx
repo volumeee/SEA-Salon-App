@@ -27,6 +27,8 @@ const ReservationScreen = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const fetchTransactions = async () => {
       if (!session || !session.user.id) {
         setLoading(false);
@@ -52,16 +54,50 @@ const ReservationScreen = () => {
       setLoading(false);
     };
 
+    const pollData = () => {
+      fetchTransactions();
+      timeoutId = setTimeout(pollData, 5000); // Poll every 5 seconds
+    };
+
     fetchTransactions();
+    pollData();
 
-    const intervalId = setInterval(fetchTransactions, 1000);
-
-    return () => clearInterval(intervalId);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [session]);
 
   if (loading) {
     return <ActivityIndicator size="large" color="#ff6347" />;
   }
+
+  const sortedTransactions = [...transactions].sort((a, b) => {
+    if (
+      a.t_state_id.status === "success" &&
+      b.t_state_id.status !== "success"
+    ) {
+      return -1;
+    } else if (
+      a.t_state_id.status !== "success" &&
+      b.t_state_id.status === "success"
+    ) {
+      return 1;
+    } else if (
+      a.t_state_id.status === "done" &&
+      b.t_state_id.status !== "done"
+    ) {
+      return 1;
+    } else if (
+      a.t_state_id.status !== "done" &&
+      b.t_state_id.status === "done"
+    ) {
+      return -1;
+    } else {
+      return (
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+    }
+  });
 
   const RenderWidget = ({ item }: { item: Transaction }) => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -82,13 +118,24 @@ const ReservationScreen = () => {
                 {item.t_specialist_name}
               </Text>
             </Text>
-            <Text className="text-xs">
-              {item.t_transaction_date
-                ? dayjs(item.t_transaction_date).format(
-                    "DD MMMM YYYY, HH:mm [WIB]"
-                  )
-                : ""}
-            </Text>
+            <View className="flex-row">
+              <Text className="text-xs">Transaction date : </Text>
+              <Text className="text-xs">
+                {item.created_at
+                  ? dayjs(item.created_at).format("DD MMMM YYYY, HH:mm [WIB]")
+                  : ""}
+              </Text>
+            </View>
+            <View className="flex-row">
+              <Text className="text-xs">Appointment date : </Text>
+              <Text className="text-xs">
+                {item.t_transaction_date
+                  ? dayjs(item.t_transaction_date).format(
+                      "DD MMMM YYYY, HH:mm [WIB]"
+                    )
+                  : ""}
+              </Text>
+            </View>
             <View className="flex-row items-center justify-between mt-2">
               <Text className="font-medium text-sm">
                 {item.t_payment_method}
@@ -114,7 +161,7 @@ const ReservationScreen = () => {
   return (
     <SafeAreaView className="flex-1 justify-center p-5">
       <FlatList
-        data={transactions}
+        data={sortedTransactions}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <RenderWidget item={item} />}
         showsVerticalScrollIndicator={false}

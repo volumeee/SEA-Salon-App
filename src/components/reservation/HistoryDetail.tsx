@@ -97,7 +97,7 @@ const HistoryDetail = ({ route }: Props) => {
           </View>
           <View style={styles.borderDashed}></View>
           <View style={styles.appointmentDetails}>
-            <Text style={styles.detailText}>Transaction Date</Text>
+            <Text style={styles.detailText}>Appointment Date</Text>
             <Text style={styles.dateText}>
               {transaction.t_transaction_date
                 ? dayjs(transaction.t_transaction_date).format(

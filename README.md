@@ -50,12 +50,21 @@ Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan aplikasi di 
    SUPABASE_KEY=your-supabase-key
    ```
 
-4. **Jalankan aplikasi:**
+4. **Jalankan aplikasi:**(⚠️pastikan sudah ada AVD atau install EXPO GO di playstore)
 
    Untuk menjalankan aplikasi di emulator atau perangkat fisik:
 
    ```bash
    npx expo start
+   ```
+
+5. **Login & Register:**
+
+   Untuk membuat akun klik Sign up dan untuk login gunakan akun ```anon``` ini:
+
+   ```bash
+   email : pelanggan@gmail.com
+   pass  : 1234567890
    ```
 
 

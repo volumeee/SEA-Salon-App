@@ -18,7 +18,7 @@ interface CategoryListProps {
   onCategoryPress: (categoryId: number) => void;
 }
 
-const CategoryList = ({ onCategoryPress }: CategoryListProps) => {
+const CategoryList = React.memo(({ onCategoryPress }: CategoryListProps) => {
   const [categories, setCategories] = React.useState<Category[]>([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -85,6 +85,6 @@ const CategoryList = ({ onCategoryPress }: CategoryListProps) => {
       showsHorizontalScrollIndicator={false}
     />
   );
-};
+});
 
 export default CategoryList;

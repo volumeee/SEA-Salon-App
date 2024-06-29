@@ -84,19 +84,19 @@ Pengguna dapat mendaftar dan masuk menggunakan email dan kata sandi mereka. Oten
 ├── src
 │   ├── components
 │   │   ├── home
-│   │   │  ├── CategoriesList.tsx
-│   │   │  ├── HairSpecialistList.tsx
+│   │   │   ├── CategoriesList.tsx
+│   │   │   ├── HairSpecialistList.tsx
 │   │   ├── other
-│   │   │  ├── CustomAlert.tsx
+│   │   │   ├── CustomAlert.tsx
 │   │   ├── profile
-│   │   │  ├── Account.tsx
-│   │   │  ├── Auth.tsx
-│   │   │  ├── Avatar.tsx
-│   │   │  ├── SessionContext.tsx
+│   │   │   ├── Account.tsx
+│   │   │   ├── Auth.tsx
+│   │   │   ├── Avatar.tsx
+│   │   │   ├── SessionContext.tsx
 │   │   ├── reservation
-│   │   │  ├── HistoryDetail.tsx
-│   │   │  ├── Transaction.tsx
-│   │   │  ├── TransactionPayment.tsx
+│   │   │   ├── HistoryDetail.tsx
+│   │   │   ├── Transaction.tsx
+│   │   │   ├── TransactionPayment.tsx
 │   ├── Navigation
 │   │   ├── BottomStackNavigation.tsx
 │   │   ├── MainStackNavigation.tsx

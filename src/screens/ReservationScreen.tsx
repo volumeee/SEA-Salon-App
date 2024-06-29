@@ -99,7 +99,7 @@ const ReservationScreen = () => {
     }
   });
 
-  const RenderWidget = ({ item }: { item: Transaction }) => {
+  const RenderWidget = React.memo(({ item }: { item: Transaction }) => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const statusColor =
       item.t_state_id.status === "done" ? "#007bff" : "#ff6347";
@@ -156,7 +156,7 @@ const ReservationScreen = () => {
         </View>
       </TouchableOpacity>
     );
-  };
+  });
 
   return (
     <SafeAreaView className="flex-1 justify-center p-5">

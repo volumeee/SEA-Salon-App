@@ -31,20 +31,14 @@ Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan aplikasi di 
 1. **Clone repository ini:**
 
    ```bash
-   git clone https://github.com/username/sea-salon-app.git
-   cd sea-salon-app
+   https://github.com/volumeee/SEA-Salon-App.git
+   cd SEA-Salon-app
    ```
 
 2. **Instal dependensi:**
 
    ```bash
    npm install
-   ```
-
-   atau
-
-   ```bash
-   yarn install
    ```
 
 3. **Konfigurasi Supabase:**
@@ -61,14 +55,9 @@ Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan aplikasi di 
    Untuk menjalankan aplikasi di emulator atau perangkat fisik:
 
    ```bash
-   npm start
+   npx expo start
    ```
 
-   atau
-
-   ```bash
-   yarn start
-   ```
 
 ## Penggunaan
 
@@ -78,7 +67,7 @@ Halaman utama menampilkan informasi tentang SEA Salon, layanan yang ditawarkan, 
 
 ### Sistem Ulasan
 
-Pengguna dapat memberikan ulasan dengan menambahkan nama mereka, rating (1-5), dan komentar. Ulasan ini akan ditampilkan di halaman utama.
+Pengguna dapat memberikan ulasan/rating dengan menambahkan nama mereka, rating (1-5), dan komentar. Ulasan ini akan ditampilkan di halaman utama.
 
 ### Sistem Reservasi
 
@@ -94,30 +83,36 @@ Pengguna dapat mendaftar dan masuk menggunakan email dan kata sandi mereka. Oten
 .
 ├── src
 │   ├── components
-│   │   ├── Account.tsx
-│   │   ├── Auth.tsx
-│   │   └── Avatar.tsx
-│   │   ├── CategoriesList.tsx
-│   │   ├── CustomAlert.tsx
-│   │   ├── Profile.tsx
-│   │   ├── Specialist.tsx
+│   │   ├── home
+│   │   │  ├── CategoriesList.tsx
+│   │   │  ├── HairSpecialistList.tsx
+│   │   ├── other
+│   │   │  ├── CustomAlert.tsx
+│   │   ├── profile
+│   │   │  ├── Account.tsx
+│   │   │  ├── Auth.tsx
+│   │   │  ├── Avatar.tsx
+│   │   │  ├── SessionContext.tsx
+│   │   ├── reservation
+│   │   │  ├── HistoryDetail.tsx
+│   │   │  ├── Transaction.tsx
+│   │   │  ├── TransactionPayment.tsx
 │   ├── Navigation
 │   │   ├── BottomStackNavigation.tsx
 │   │   ├── MainStackNavigation.tsx
 │   ├── screens
-│   │   └── HomeScreen.tsx
+│   │   ├── HomeScreen.tsx
 │   │   ├── ProfileScreen.tsx
 │   │   ├── ReservationScreen.tsx
-│   │   └── SavedScreen.tsx
 │   │   ├── SplashScreen.tsx
 │   ├── services
 │   │   ├── supabase.ts
 │   │   types
 │   │   ├── env.d.ts
+│   │   ├── NavigationTypes.ts
 │   └── App.js
 ├── .env
-├── package.json
-└── README.md
+└── etc..
 ```
 
 ### Lisensi

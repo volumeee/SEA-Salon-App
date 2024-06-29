@@ -115,10 +115,7 @@ Pengguna dapat mendaftar dan masuk menggunakan email dan kata sandi mereka. Oten
 └── etc..
 ```
 
-### Lisensi
-
-Proyek ini dilisensikan di bawah MIT License.
 
 ### Kontak
 
-Jika Anda memiliki pertanyaan atau saran, silakan hubungi kami di mr.volumee@gmail.com
+Jika Anda memiliki pertanyaan atau saran, silakan hubungi saya di mr.volumee@gmail.com
